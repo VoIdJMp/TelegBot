@@ -6,4 +6,6 @@ const bot  = new TelegramBot(TOKEN, {polling: true});
 
 bot.on('message', msg => {
     bot.sendMessage(msg.chat.id, `Hello ${msg.from.first_name} `);
+    bot.sendMessage(msg.chat.id, `Вы гадёныш`);
+    bot.sendMessage(msg.chat.id, `Извыните ${msg.from.first_name}`);
 });
