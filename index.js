@@ -5,6 +5,7 @@ const TOKEN = '823493917:AAGZ8k8geDfaWYZPOFffQAZaigwq8eQurcg';
 const bot  = new TelegramBot(TOKEN, {polling: true});
 
 bot.on('message', msg => {
+     bot.sendMessage(msg.chat.id, message.text);
     if(message.text == 'Привет') {
         bot.sendMessage(msg.chat.id, `Привет ${msg.from.first_name} `);
     }
