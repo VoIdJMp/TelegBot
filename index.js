@@ -4,19 +4,24 @@ const TOKEN = '823493917:AAGZ8k8geDfaWYZPOFffQAZaigwq8eQurcg';
 
 const bot  = new TelegramBot(TOKEN, {polling: true});
 
-bot.on('message', msg => {
-      bot.sendMessage(msg.chat.id, 'Привет народ');
-     bot.sendMessage(msg.chat.id, message.text);
-    if(message.text == 'Привет') {
-        bot.sendMessage(msg.chat.id, `Привет ${msg.from.first_name} `);
-    }
-    if(message.text == 'Как ты?') {
-        bot.sendMessage(msg.chat.id, `Хорошо, А вы как?`);
-    }
-    if(message.text == 'МГУ') {
-        bot.sendMessage(msg.chat.id, `Хехе..`);
-    }
-    if(message.text == 'Прошай бот') {
-        bot.sendMessage(msg.chat.id, `Прошайте`);
-    }
+var notes = [];
+
+bot.onText(/напомни (.+) в (.+)/, function (msg, match) {
+    var userId = msg.from.id;
+    var text = match[1];
+    var time = match[2];
+
+    notes.push({ 'uid': userId, 'time': time, 'text': text });
+
+    bot.sendMessage(userId, 'Отлично! Я обязательно напомню, если не сдохну :)');
 });
+
+setInterval(function(){
+    for (var i = 0; i < notes.length; i++) {
+    const curDate = new Date().getHours() + ':' + new Date().getMinutes();
+    if (notes[i]['time'] === curDate) {
+      bot.sendMessage(notes[i]['uid'], 'Напоминаю, что вы должны: '+ notes[i]['text'] + ' сейчас.');
+      notes.splice(i, 1);
+    }
+  }
+}, 1000);
