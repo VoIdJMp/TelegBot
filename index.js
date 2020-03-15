@@ -6,11 +6,8 @@ const bot  = new TelegramBot(TOKEN, {polling: true});
 
 var notes = [];
 
-bot.onText(/напомни (.+) в (.+)/, function (msg, match) {
-    var userId = msg.from.id;
-    var text = match[1];
-    var time = match[2];
+bot.onText('Привет', function (msg, match) {
 
-    bot.sendMessage(userId, 'Я обязательно напомню:)');
+    bot.sendMessage(userId, 'Привет:)');
 });
 
