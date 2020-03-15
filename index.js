@@ -6,8 +6,6 @@ const bot  = new TelegramBot(TOKEN, {polling: true});
 
 var notes = [];
 
-bot.onText(/Привет/, function (msg, match) {
-
-    bot.sendMessage(userId, 'Привет:)');
+bot.on('message', msg => {
+    bot.sendMessage(msg.chat.id, `Hi`);
 });
-
